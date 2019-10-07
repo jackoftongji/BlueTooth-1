@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Experimenters_id"
+                />
+            <EditText
+                android:enabled="false"
+                android:id="@+id/waveform"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="wave_data"
+                />
+            <EditText
+                android:id="@+id/construction_site"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="equipment"
+                />
+            <EditText
+                android:id="@+id/section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="construction_site"
+                />
+            <EditText
+                android:id="@+id/mileage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="section"
+                />
+            <EditText
+                android:id="@+id/author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Experimenters"
+                />
+            <EditText
+                android:id="@+id/upload_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="upload_data"
+                />
+            <EditText
+                android:id="@+id/found_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="found_data"
+                />
+
+            <Button android:id="@+id/Button_1"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="send"
+                />
+            <EditText
+                android:id="@+id/query_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="query_id"
+                />
+            <Button
+                android:id="@+id/Button_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="query"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

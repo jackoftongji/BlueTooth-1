@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">BlueTooth</string>
+
+    <string-array name="acquisition_rate">
+        <item>5s</item>
+        <item>5m</item>
+        <item>5h</item>
+    </string-array>
+    <string-array name="email_importance">
+        <item>不重要</item>
+        <item>重要</item>
+        <item>非常重要</item>
+    </string-array>
+</resources>
