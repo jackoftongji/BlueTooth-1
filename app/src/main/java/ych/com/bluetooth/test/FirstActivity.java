@@ -3,13 +3,16 @@ package ych.com.bluetooth.test;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.google.gson.Gson;
@@ -29,27 +32,31 @@ import ych.com.bluetooth.R;
 import ych.com.bluetooth.bluetooth.BlueToothTool;
 
 public class FirstActivity extends AppCompatActivity {
-    private EditText editText01;
-    private EditText editText02;
-    private EditText editText03;
-    private EditText editText04;
-    private EditText editText05;
-    private EditText editText06;
-    private EditText editText07;
-    private EditText editText08;
-    private EditText editText09;
+    private EditText editTextId;
+    private EditText editTextWaveform;
+    private EditText editTextEquipment;
+    private EditText editTextConstructionSite;
+    private EditText editTextSection;
+    private EditText editTextAuthor;
+    private EditText editTextUploadDate;
+    private EditText editTextFoundDate;
+    private EditText editTextQueryData;
 
     private Button button1;
     private Button button2;
 
     private BluetoothDevice device;
 
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    private CheckBox rememberInfo;
+
     @SuppressLint("HandlerLeak")
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             String data = (String)msg.obj;
-            editText02.setText(data);
+            editTextWaveform.setText(data);
         }
     };
 
@@ -68,18 +75,33 @@ public class FirstActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String string01 = editText01.getText().toString();
-                long id01 = Long.parseLong(string01);
-                String string02 = editText02.getText().toString();
-                String string03 = editText03.getText().toString();
-                String string04 = editText04.getText().toString();
-                String string05 = editText05.getText().toString();
-                String string06 = editText06.getText().toString();
-                String string07 = editText07.getText().toString();
-                String string08 = editText08.getText().toString();
+                String id = editTextId.getText().toString();
+                long id01 = Long.parseLong(id);
+                String waveform = editTextWaveform.getText().toString();
+                String equipment = editTextEquipment.getText().toString();
+                String constructionSite = editTextConstructionSite.getText().toString();
+                String section = editTextSection.getText().toString();
+                String author = editTextAuthor.getText().toString();
+                String uploadDate = editTextUploadDate.getText().toString();
+                String foundDate = editTextFoundDate.getText().toString();
+
+                editor=sharedPreferences.edit();
+                if (rememberInfo.isChecked()){
+                    editor.putBoolean("remember_info",true);
+                    editor.putString("equipment",equipment);
+                    editor.putString("constructionSite",constructionSite);
+                    editor.putString("section",section);
+                    editor.putString("author",author);
+                    editor.putString("uploadDate",uploadDate);
+                    editor.putString("foundDate",foundDate);
+                }else {
+                    editor.clear();
+                }
+                editor.apply();
+
                 Retrofit retrofit;
                 //Ultrasound ultrasound = new Ultrasound(20,"0.00 0.01 1.12 1.34","上海","一号段","400km","肖","2019年8月29号","2019年8月29号");
-                Ultrasound ultrasound = new Ultrasound(id01, string02, string03, string04, string05, string06, string07, string08);
+                Ultrasound ultrasound = new Ultrasound(id01, waveform, equipment, constructionSite, section, author, uploadDate, foundDate);
                 Gson gson = new Gson();
                 String obj = gson.toJson(ultrasound);
                 retrofit = new Retrofit.Builder().baseUrl("http://homily.cn:8001/").build();
@@ -110,7 +132,7 @@ public class FirstActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String string09 = editText09.getText().toString();
+                String string09 = editTextQueryData.getText().toString();
                 Long id02 = Long.parseLong(string09);
                 Retrofit retrofit02 = new Retrofit.Builder().baseUrl("http://homily.cn:8001/").build();
                 BookService bookService02 = retrofit02.create(BookService.class);
@@ -164,20 +186,40 @@ public class FirstActivity extends AppCompatActivity {
             }
         });
 
+        sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isRemember=sharedPreferences.getBoolean("remember_info",false);
+        if (isRemember){
+            String equipment=sharedPreferences.getString("equipment","");
+            String constructionSite=sharedPreferences.getString("constructionSite","");
+            String section=sharedPreferences.getString("section","");
+            String author=sharedPreferences.getString("author","");
+            String uploadDate=sharedPreferences.getString("uploadDate","");
+            String foundDate=sharedPreferences.getString("foundDate","");
+
+            editTextEquipment.setText(equipment);
+            editTextConstructionSite.setText(constructionSite);
+            editTextSection.setText(section);
+            editTextAuthor.setText(author);
+            editTextUploadDate.setText(uploadDate);
+            editTextFoundDate.setText(foundDate);
+        }
+
     }
 
     private void initView() {
         button1 = (Button) findViewById(R.id.Button_1);
         button2 = (Button) findViewById(R.id.Button_2);
-        editText01 = (EditText) findViewById(R.id.id);
-        editText02 = (EditText) findViewById(R.id.waveform);
-        editText03 = (EditText) findViewById(R.id.construction_site);
-        editText04 = (EditText) findViewById(R.id.section);
-        editText05 = (EditText) findViewById(R.id.mileage);
-        editText06 = (EditText) findViewById(R.id.author);
-        editText07 = (EditText) findViewById(R.id.upload_data);
-        editText08 = (EditText) findViewById(R.id.found_data);
-        editText09 = (EditText) findViewById(R.id.query_data);
+        editTextId = (EditText) findViewById(R.id.id);
+        editTextWaveform = (EditText) findViewById(R.id.waveform);
+        editTextEquipment = (EditText) findViewById(R.id.equipment);
+        editTextConstructionSite = (EditText) findViewById(R.id.construction_site);
+        editTextSection = (EditText) findViewById(R.id.section);
+        editTextAuthor = (EditText) findViewById(R.id.author);
+        editTextUploadDate = (EditText) findViewById(R.id.upload_date);
+        editTextFoundDate = (EditText) findViewById(R.id.found_date);
+        editTextQueryData = (EditText) findViewById(R.id.query_data);
+
+        rememberInfo=(CheckBox)findViewById(R.id.remember_info);
     }
 
     private void initLayout() {

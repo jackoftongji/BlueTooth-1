@@ -25,19 +25,19 @@
                 android:hint="wave_data"
                 />
             <EditText
-                android:id="@+id/construction_site"
+                android:id="@+id/equipment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="equipment"
                 />
             <EditText
-                android:id="@+id/section"
+                android:id="@+id/construction_site"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="construction_site"
                 />
             <EditText
-                android:id="@+id/mileage"
+                android:id="@+id/section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="section"
@@ -49,17 +49,33 @@
                 android:hint="Experimenters"
                 />
             <EditText
-                android:id="@+id/upload_data"
+                android:id="@+id/upload_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="upload_data"
+                android:hint="upload_date"
                 />
             <EditText
-                android:id="@+id/found_data"
+                android:id="@+id/found_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="found_data"
+                android:hint="found_date"
                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/remember_info"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="Remember Information"/>
+
+            </LinearLayout>
 
             <Button android:id="@+id/Button_1"
                 android:layout_height="wrap_content"

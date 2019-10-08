@@ -79,6 +79,9 @@ public class BlueToothActivity extends AppCompatActivity implements BlueToothCon
         intent.addAction(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED);//行动扫描模式改变了
         intent.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);//动作状态发生了变化
         registerReceiver(searchDevices, intent);
+
+        tv_scan.performClick(); //自动开始扫描蓝牙
+
     }
 
 
