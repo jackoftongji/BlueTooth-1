@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -70,7 +71,7 @@ public class FirstActivity extends AppCompatActivity {
         initView();
         initData();
         initListener();
-
+        setTime();
     }
 
     private void initListener() {
@@ -101,6 +102,8 @@ public class FirstActivity extends AppCompatActivity {
                     editor.clear();
                 }
                 editor.apply();
+
+                setTime();
 
                 Retrofit retrofit;
                 //Ultrasound ultrasound = new Ultrasound(20,"0.00 0.01 1.12 1.34","上海","一号段","400km","肖","2019年8月29号","2019年8月29号");
@@ -189,6 +192,7 @@ public class FirstActivity extends AppCompatActivity {
             }
         });
 
+        //记住所输信息
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
         boolean isRemember=sharedPreferences.getBoolean("remember_info",false);
         if (isRemember){
@@ -244,4 +248,20 @@ public class FirstActivity extends AppCompatActivity {
         super.onRestart();
         Log.d(TAG, "onRestart: ");
     }
+
+    public void setTime(){
+        Calendar calendar=Calendar.getInstance();
+
+        int year=calendar.get(Calendar.YEAR);
+        int month=calendar.get(Calendar.MONTH)+1;
+        int day=calendar.get(Calendar.DAY_OF_MONTH);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+
+        editTextUploadDate.setText(year+"年"+month+"月"+day+"日  "+hour+":"+minute);
+        editTextFoundDate.setText(year+"年"+month+"月"+day+"日  "+hour+":"+minute);
+    }
+
+
 }
