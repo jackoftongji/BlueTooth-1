@@ -234,20 +234,11 @@ public class FirstActivity extends AppCompatActivity {
     }
 
     public void collectDataAgain(View view){
-//        Intent intent=new Intent(FirstActivity.this,FirstActivity.class);
-//        startActivity(intent);
-
-        onRestart();
-
+        recreate();
         Toast.makeText(this, "collectDataAgain", Toast.LENGTH_SHORT).show();
     }
 
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d(TAG, "onRestart: ");
-    }
 
     public void setTime(){
         Calendar calendar=Calendar.getInstance();
