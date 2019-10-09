@@ -235,6 +235,7 @@ public class FirstActivity extends AppCompatActivity {
 
     public void collectDataAgain(View view){
         recreate();
+        setTime();
         Toast.makeText(this, "collectDataAgain", Toast.LENGTH_SHORT).show();
     }
 
@@ -253,6 +254,8 @@ public class FirstActivity extends AppCompatActivity {
         editTextUploadDate.setText(year+"年"+month+"月"+day+"日  "+hour+":"+minute);
         editTextFoundDate.setText(year+"年"+month+"月"+day+"日  "+hour+":"+minute);
     }
+
+
 
 
 }
