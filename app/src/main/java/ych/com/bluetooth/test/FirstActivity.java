@@ -32,6 +32,9 @@ import ych.com.bluetooth.R;
 import ych.com.bluetooth.bluetooth.BlueToothTool;
 
 public class FirstActivity extends AppCompatActivity {
+
+    private static final String TAG = "FirstActivity";
+
     private EditText editTextId;
     private EditText editTextWaveform;
     private EditText editTextEquipment;
@@ -224,5 +227,21 @@ public class FirstActivity extends AppCompatActivity {
 
     private void initLayout() {
         setContentView(R.layout.first_layout);
+    }
+
+    public void collectDataAgain(View view){
+//        Intent intent=new Intent(FirstActivity.this,FirstActivity.class);
+//        startActivity(intent);
+
+        onRestart();
+
+        Toast.makeText(this, "collectDataAgain", Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "onRestart: ");
     }
 }

@@ -77,6 +77,13 @@
 
             </LinearLayout>
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/collect_data_again"
+                android:text="collect data again"
+                android:onClick="collectDataAgain"/>
+
             <Button android:id="@+id/Button_1"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
