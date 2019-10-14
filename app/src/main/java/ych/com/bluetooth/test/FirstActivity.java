@@ -55,6 +55,8 @@ public class FirstActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private CheckBox rememberInfo;
 
+
+
     @SuppressLint("HandlerLeak")
     Handler handler = new Handler(){
         @Override
@@ -89,19 +91,7 @@ public class FirstActivity extends AppCompatActivity {
                 String uploadDate = editTextUploadDate.getText().toString();
                 String foundDate = editTextFoundDate.getText().toString();
 
-                editor=sharedPreferences.edit();
-                if (rememberInfo.isChecked()){
-                    editor.putBoolean("remember_info",true);
-                    editor.putString("equipment",equipment);
-                    editor.putString("constructionSite",constructionSite);
-                    editor.putString("section",section);
-                    editor.putString("author",author);
-                    editor.putString("uploadDate",uploadDate);
-                    editor.putString("foundDate",foundDate);
-                }else {
-                    editor.clear();
-                }
-                editor.apply();
+                putDataInSharedPreferences();
 
                 setTime();
 
@@ -193,23 +183,7 @@ public class FirstActivity extends AppCompatActivity {
         });
 
         //记住所输信息
-        sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
-        boolean isRemember=sharedPreferences.getBoolean("remember_info",false);
-        if (isRemember){
-            String equipment=sharedPreferences.getString("equipment","");
-            String constructionSite=sharedPreferences.getString("constructionSite","");
-            String section=sharedPreferences.getString("section","");
-            String author=sharedPreferences.getString("author","");
-            String uploadDate=sharedPreferences.getString("uploadDate","");
-            String foundDate=sharedPreferences.getString("foundDate","");
-
-            editTextEquipment.setText(equipment);
-            editTextConstructionSite.setText(constructionSite);
-            editTextSection.setText(section);
-            editTextAuthor.setText(author);
-            editTextUploadDate.setText(uploadDate);
-            editTextFoundDate.setText(foundDate);
-        }
+        getDataFromSharedPreferences();
 
     }
 
@@ -234,8 +208,11 @@ public class FirstActivity extends AppCompatActivity {
     }
 
     public void collectDataAgain(View view){
+
         recreate();
+
         setTime();
+        putDataInSharedPreferences();
         Toast.makeText(this, "collectDataAgain", Toast.LENGTH_SHORT).show();
     }
 
@@ -253,6 +230,58 @@ public class FirstActivity extends AppCompatActivity {
 
         editTextUploadDate.setText(year+"年"+month+"月"+day+"日  "+hour+":"+minute);
         editTextFoundDate.setText(year+"年"+month+"月"+day+"日  "+hour+":"+minute);
+    }
+
+
+    //记住所输信息
+
+    public void getDataFromSharedPreferences(){
+
+        sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isRemember=sharedPreferences.getBoolean("remember_info",false);
+
+        if (isRemember){
+            String equipment1=sharedPreferences.getString("equipment","");
+            String constructionSite1=sharedPreferences.getString("constructionSite","");
+            String section1=sharedPreferences.getString("section","");
+            String author1=sharedPreferences.getString("author","");
+            String uploadDate1=sharedPreferences.getString("uploadDate","");
+            String foundDate1=sharedPreferences.getString("foundDate","");
+
+            editTextEquipment.setText(equipment1);
+            editTextConstructionSite.setText(constructionSite1);
+            editTextSection.setText(section1);
+            editTextAuthor.setText(author1);
+            editTextUploadDate.setText(uploadDate1);
+            editTextFoundDate.setText(foundDate1);
+
+            rememberInfo.setChecked(true);
+        }
+
+    }
+
+    public void putDataInSharedPreferences(){
+        String equipment0 = editTextEquipment.getText().toString();
+        String constructionSite0 = editTextConstructionSite.getText().toString();
+        String section0 = editTextSection.getText().toString();
+        String author0 = editTextAuthor.getText().toString();
+        String uploadDate0 = editTextUploadDate.getText().toString();
+        String foundDate0 = editTextFoundDate.getText().toString();
+
+        editor=sharedPreferences.edit();
+        if (rememberInfo.isChecked()){
+            editor.putBoolean("remember_info",true);
+
+            editor.putString("equipment",equipment0);
+            editor.putString("constructionSite",constructionSite0);
+            editor.putString("section",section0);
+            editor.putString("author",author0);
+            editor.putString("uploadDate",uploadDate0);
+            editor.putString("foundDate",foundDate0);
+        }else {
+            editor.clear();
+        }
+        editor.apply();
     }
 
 
