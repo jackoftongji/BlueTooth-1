@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextClock;
 import android.widget.Toast;
 import com.google.gson.Gson;
 
@@ -42,8 +43,12 @@ public class FirstActivity extends AppCompatActivity {
     private EditText editTextConstructionSite;
     private EditText editTextSection;
     private EditText editTextAuthor;
-    private EditText editTextUploadDate;
-    private EditText editTextFoundDate;
+//    private EditText editTextUploadDate;
+//    private EditText editTextFoundDate;
+
+    private TextClock editTextUploadDate;
+    private TextClock editTextFoundDate;
+
     private EditText editTextQueryData;
 
     private Button button1;
@@ -73,7 +78,7 @@ public class FirstActivity extends AppCompatActivity {
         initView();
         initData();
         initListener();
-        setTime();
+        //setTime();
     }
 
     private void initListener() {
@@ -93,7 +98,7 @@ public class FirstActivity extends AppCompatActivity {
 
                 putDataInSharedPreferences();
 
-                setTime();
+                //setTime();
 
                 Retrofit retrofit;
                 //Ultrasound ultrasound = new Ultrasound(20,"0.00 0.01 1.12 1.34","上海","一号段","400km","肖","2019年8月29号","2019年8月29号");
@@ -196,8 +201,12 @@ public class FirstActivity extends AppCompatActivity {
         editTextConstructionSite = (EditText) findViewById(R.id.construction_site);
         editTextSection = (EditText) findViewById(R.id.section);
         editTextAuthor = (EditText) findViewById(R.id.author);
-        editTextUploadDate = (EditText) findViewById(R.id.upload_date);
-        editTextFoundDate = (EditText) findViewById(R.id.found_date);
+//        editTextUploadDate = (EditText) findViewById(R.id.upload_date);
+//        editTextFoundDate = (EditText) findViewById(R.id.found_date);
+
+        editTextUploadDate = (TextClock) findViewById(R.id.upload_date);
+        editTextFoundDate = (TextClock) findViewById(R.id.found_date);
+
         editTextQueryData = (EditText) findViewById(R.id.query_data);
 
         rememberInfo=(CheckBox)findViewById(R.id.remember_info);
@@ -211,7 +220,7 @@ public class FirstActivity extends AppCompatActivity {
 
         recreate();
 
-        setTime();
+//        setTime();
         putDataInSharedPreferences();
         Toast.makeText(this, "collectDataAgain", Toast.LENGTH_SHORT).show();
     }

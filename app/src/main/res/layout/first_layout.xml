@@ -125,12 +125,18 @@
                     android:layout_height="wrap_content"
                     android:text="上传时间">
                 </TextView>
-                <EditText
+<!--                <EditText-->
+<!--                    android:id="@+id/upload_date"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:hint="upload_date"-->
+                    />
+                <TextClock
                     android:id="@+id/upload_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="upload_date"
-                    />
+                    android:format12Hour="yyyy/MM/dd HH:mm:ss"
+                    android:format24Hour="yyyy/MM/dd HH:mm:ss"/>
             </LinearLayout>
 
             <LinearLayout
@@ -142,12 +148,18 @@
                     android:layout_height="wrap_content"
                     android:text="创建时间">
                 </TextView>
-                <EditText
+<!--                <EditText-->
+<!--                    android:id="@+id/found_date"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:hint="found_date"-->
+<!--                    />-->
+                <TextClock
                     android:id="@+id/found_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="found_date"
-                    />
+                    android:format12Hour="yyyy/MM/dd HH:mm:ss"
+                    android:format24Hour="yyyy/MM/dd HH:mm:ss"/>
             </LinearLayout>
 
 
